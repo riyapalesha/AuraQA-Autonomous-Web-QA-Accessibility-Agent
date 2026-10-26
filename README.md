@@ -1,4 +1,4 @@
-# 🍎 AuraQA: Autonomous Web QA & Accessibility Agent
+# 🔍 AuraQA: Autonomous Web QA & Accessibility Agent
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
@@ -112,9 +112,3 @@ python -m pytest
 AuraQA audits applications against:
 * **W3C WCAG 2.1 Level AA & AAA:** Inclusive color contrast, accessible names, ARIA landmark roles, and keyboard navigation.
 * **Apple Human Interface Guidelines (HIG):** VoiceOver screen-reader ergonomics, legible Dynamic Type scaling, and touch target sizing.
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
