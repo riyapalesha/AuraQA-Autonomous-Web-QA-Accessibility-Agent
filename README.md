@@ -14,7 +14,7 @@
 
 Unlike passive chatbots, AuraQA operates as an autonomous testing engine: driving real Chromium browsers, auditing DOM trees and accessibility trees, probing interactive elements, detecting runtime JavaScript exceptions, and synthesizing triaged bug reports with exact code remediation patches.
 
----
+
 
 ## 🎯 Key Capabilities
 
@@ -26,7 +26,7 @@ Unlike passive chatbots, AuraQA operates as an autonomous testing engine: drivin
 - **Interactive Visual Reports & PDF Export:** Generates self-contained, printable HTML and A4 PDF audit reports using Playwright's native Chromium printing engine, alongside a live real-time Streamlit dashboard.
 - **Visual Inspection Demo Mode:** When running in headful mode, Chromium automatically scrolls through the full layout to simulate real user inspection before pausing and cleanly closing.
 
----
+
 
 ## 🏗️ Architecture
 
@@ -65,7 +65,7 @@ Unlike passive chatbots, AuraQA operates as an autonomous testing engine: drivin
          └───────────────────────┘    └──────────────────────────┘
 ```
 
----
+
 
 ## 🚀 Quick Start
 
@@ -96,7 +96,7 @@ python cli.py --url https://news.ycombinator.com
 python cli.py --url https://news.ycombinator.com --headful
 ```
 
----
+
 
 ## 🧪 Testing
 
@@ -105,7 +105,7 @@ Run the automated test suite against the local testbed:
 python -m pytest
 ```
 
----
+
 
 ## 📜 Standards & Compliance
 
