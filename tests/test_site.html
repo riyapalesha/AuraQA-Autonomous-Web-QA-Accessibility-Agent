@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AuraQA Test Application</title>
+    <style>
+        body { font-family: sans-serif; background: #ffffff; }
+        /* Deliberate contrast violation: light gray text on white background */
+        .bad-contrast { color: #cccccc; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Accessible Web Testbed</h1>
+    
+    <!-- Deliberate Violation: Image missing alt attribute -->
+    <img src="logo.png" id="test-logo">
+
+    <!-- Deliberate Violation: Low contrast text -->
+    <p class="bad-contrast" id="contrast-text">This text has insufficient color contrast against the white background.</p>
+
+    <!-- Deliberate Violation: Button without accessible text or aria-label -->
+    <button id="empty-btn"></button>
+
+    <!-- Deliberate Violation: Anchor with href="#" -->
+    <a href="#" id="dead-link">Dead Link Placeholder</a>
+</body>
+</html>

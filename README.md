@@ -1,57 +1,64 @@
-# ⚡ AgentFlow: Conversational Enterprise Workflow Orchestration Engine
+# 🍎 AuraQA: Autonomous Web QA & Accessibility Agent
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![LangGraph](https://img.shields.io/badge/orchestration-LangGraph-orange.svg)](https://github.com/langchain-ai/langgraph)
-[![Streamlit](https://img.shields.io/badge/ui-Streamlit-red.svg)](https://streamlit.io/)
+[![Playwright](https://img.shields.io/badge/browser-Playwright-green.svg)](https://playwright.dev/)
+[![WCAG 2.1](https://img.shields.io/badge/compliance-WCAG_2.1_AA-orange.svg)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+[![Apple HIG](https://img.shields.io/badge/guidelines-Apple_HIG-black.svg)](https://developer.apple.com/design/human-interface-guidelines/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**AgentFlow** is an enterprise-grade agentic AI platform that transforms conversational natural language requests into structured, executable Directed Acyclic Graph (DAG) workflows across enterprise tools. It incorporates **Human-in-the-Loop (HITL) safety gates** to prevent unauthorized mutations, stateful checkpointing for pause-and-resume operations, and real-time execution monitoring.
+**AuraQA** is an autonomous AI Quality Assurance (QA) and Accessibility agent engineered to audit web applications against **WCAG 2.1 Level AA/AAA** and **Apple Human Interface Guidelines (HIG)** standards. 
+
+Unlike passive chatbots, AuraQA operates as an autonomous testing engine: driving real Chromium browsers, auditing DOM trees and accessibility trees, probing interactive elements, detecting runtime JavaScript exceptions, and synthesizing triaged bug reports with exact code remediation patches.
 
 ---
 
-## 🎯 Key Features
+## 🎯 Key Capabilities
 
-- **Natural Language Intent Decomposition:** Decomposes complex user requests into discrete, typed workflow tasks with dependency resolution.
-- **Human-in-the-Loop (HITL) Safety Gates:** Non-destructive operations (read/diagnostics) execute autonomously, while sensitive mutations (database updates, alerts, access grants) halt the state graph and request approval via interactive UI cards.
-- **State Machine Architecture (LangGraph):** Built using cyclical state graphs with conditional routing and state persistence rather than rigid linear chains.
-- **Session Checkpointing & Audit Trail:** Persists conversation states and full execution audit trails into SQLite, enabling zero-loss recovery across restarts.
-- **Interactive Dual-Panel UI:** Features a conversational interface alongside a live visual task monitor showing execution status and output inspectability.
-- **Zero-Dependency Demo Mode:** Ships with an intelligent built-in mock LLM engine so the platform can be evaluated immediately without external API keys or cloud dependencies.
+- **Autonomous Headful/Headless Browser Driving:** Utilizes **Playwright** to navigate real web applications, capture full-page visual evidence screenshots, and listen to runtime console exceptions and HTTP 4xx/5xx network failures.
+- **Automated WCAG 2.1 Compliance Audit:** Injects the industry-standard `axe-core` accessibility engine directly into the browser's DOM context, detecting color contrast failures, missing image alt attributes, broken ARIA roles, and keyboard navigation traps.
+- **Exploratory Defect Probing:** Discovers interactive buttons, links, and form fields, flagging dead click targets (`href='#'`) and buttons lacking accessible names for screen readers.
+- **Agentic Severity Triage & Patch Synthesis:** Categorizes findings into `P0 Critical Blockers`, `P1 Major Defects`, and `P2 Minor Issues`, providing exact HTML/CSS/JS code remediation patches.
+- **Apple HIG Executive Assessment:** Evaluates page ergonomics against Apple's inclusive design principles, highlighting VoiceOver usability and Dynamic Type readability.
+- **Interactive Visual Reports & PDF Export:** Generates self-contained, printable HTML and A4 PDF audit reports using Playwright's native Chromium printing engine, alongside a live real-time Streamlit dashboard.
+- **Visual Inspection Demo Mode:** When running in headful mode, Chromium automatically scrolls through the full layout to simulate real user inspection before pausing and cleanly closing.
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-                               ┌────────────────────────┐
-                               │   User Conversational   │
-                               │      Chat Input        │
-                               └───────────┬────────────┘
-                                           │
-                                           ▼
-                               ┌────────────────────────┐
-                               │   Planner Node (LLM)   │
-                               │ (Intent Decomposition) │
-                               └───────────┬────────────┘
-                                           │
-                                           ▼
-                             ┌────────────────────────────┐
-                             │    Conditional Router      │◄──────────┐
-                             └──────┬──────────────┬──────┘           │
-                 Requires Approval? │              │ Safe / Approved  │
-                                    ▼              ▼                  │
-                     ┌──────────────────┐    ┌──────────────────┐     │
-                     │  HITL Gate Node  │    │  Executor Node   │     │
-                     │ (Pauses for User)│    │ (Tool Invocation)│─────┘
-                     └────────┬─────────┘    └──────────────────┘
-                              │
-                    User Click: Approve / Reject
-                              │
-                              ▼
-                     ┌──────────────────┐
-                     │ Synthesizer Node │
-                     │   (Report/RCA)   │
-                     └──────────────────┘
+                    ┌───────────────────────────────┐
+                    │  AuraQA Agent Orchestrator    │
+                    └───────────────┬───────────────┘
+                                    │
+                                    ▼
+                    ┌───────────────────────────────┐
+                    │ Playwright Chromium Engine    │
+                    │   (Headful / Headless Mode)   │
+                    └───────┬───────────────┬───────┘
+                            │               │
+             DOM & Visual   │               │ Runtime Telemetry
+             Inspection     ▼               ▼
+         ┌───────────────────────┐    ┌──────────────────────────┐
+         │ Injected axe-core     │    │ Console & Network        │
+         │ (WCAG 2.1 AA/AAA)     │    │ Exception Listener       │
+         └──────────┬────────────┘    └─────────────┬────────────┘
+                    │                               │
+                    └───────────────┬───────────────┘
+                                    │
+                                    ▼
+                    ┌───────────────────────────────┐
+                    │ Agentic Triage & HIG Evaluator│
+                    │ (P0/P1/P2 Classification &    │
+                    │  Code Remediation Synthesis)  │
+                    └───────────────┬───────────────┘
+                                    │
+                     ┌──────────────┴──────────────┐
+                     ▼                             ▼
+         ┌───────────────────────┐    ┌──────────────────────────┐
+         │ Standalone HTML       │    │ Interactive Streamlit    │
+         │ Report (Apple Styled) │    │ Live Web Dashboard       │
+         └───────────────────────┘    └──────────────────────────┘
 ```
 
 ---
@@ -64,34 +71,46 @@ Clone the repository and install dependencies:
 git clone <your-repo-url>
 cd AI-Project
 pip install -r requirements.txt
+playwright install chromium
 ```
 
-### 2. Run the Application
-Launch the interactive Streamlit dashboard:
+### 2. Launch the Interactive Dashboard
+Open the live Streamlit dashboard:
 ```bash
 python main.py
 # Or directly:
 streamlit run ui/app.py
 ```
+* Toggle **"Show Browser Live (Headful)"** to watch Chromium pop up and audit the page on your screen.
+* Select a quick preset or type any URL (e.g., `https://news.ycombinator.com` or `http://localhost:3000`).
 
-### 3. (Optional) Configure Real LLM Providers
-By default, AgentFlow runs in **Mock Demo Mode** for immediate zero-config testing. To use external models, copy `.env.example` to `.env`:
+### 3. Run via CLI (CI/CD Pipeline Ready)
+Execute headless or headful audits directly from your terminal:
 ```bash
-cp .env.example .env
+python cli.py --url https://news.ycombinator.com
+# To watch the browser live:
+python cli.py --url https://news.ycombinator.com --headful
 ```
-Set `LLM_PROVIDER` to `openai`, `groq`, `gemini`, or `ollama` and provide your API key.
 
 ---
 
 ## 🧪 Testing
 
-Run the automated test suite verifying state transitions, HITL gates, and rejection branches:
+Run the automated test suite against the local testbed:
 ```bash
 python -m pytest
 ```
 
 ---
 
-## 💼 Master's Resume & Interview Preparation
+## 📜 Standards & Compliance
 
-For an in-depth breakdown of architecture decisions, interview questions, and resume bullet points, see the [Interview Guide](docs/INTERVIEW_GUIDE.md).
+AuraQA audits applications against:
+* **W3C WCAG 2.1 Level AA & AAA:** Inclusive color contrast, accessible names, ARIA landmark roles, and keyboard navigation.
+* **Apple Human Interface Guidelines (HIG):** VoiceOver screen-reader ergonomics, legible Dynamic Type scaling, and touch target sizing.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.

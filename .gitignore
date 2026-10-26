@@ -27,20 +27,25 @@ wheels/
 venv/
 ENV/
 
-# Streamlit
-.streamlit/
+# Playwright & Screenshots
+reports/*.png
+reports/*.html
+reports/*.pdf
+*.pdf
+!reports/.gitkeep
 
-# Database & State Checkpoints
-*.sqlite
-*.sqlite3
-*.db
-agentflow_sessions.db
-
-# Pytest / Cache
+# Pytest
 .pytest_cache/
 .coverage
 htmlcov/
 
+# Streamlit
+.streamlit/
+
 # IDE
 .vscode/
 .idea/
+
+# Personal Interview & Preparation Notes (Keep local only)
+docs/
+docs/APPLE_INTERVIEW_GUIDE.md
