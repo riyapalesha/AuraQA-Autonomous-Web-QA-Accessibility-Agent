@@ -1,9 +1,13 @@
 # 🍎 AuraQA: Autonomous Web QA & Accessibility Agent
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
 [![Playwright](https://img.shields.io/badge/browser-Playwright-green.svg)](https://playwright.dev/)
+
 [![WCAG 2.1](https://img.shields.io/badge/compliance-WCAG_2.1_AA-orange.svg)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+
 [![Apple HIG](https://img.shields.io/badge/guidelines-Apple_HIG-black.svg)](https://developer.apple.com/design/human-interface-guidelines/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **AuraQA** is an autonomous AI Quality Assurance (QA) and Accessibility agent engineered to audit web applications against **WCAG 2.1 Level AA/AAA** and **Apple Human Interface Guidelines (HIG)** standards. 
